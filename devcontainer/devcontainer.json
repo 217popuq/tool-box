@@ -5,10 +5,10 @@
     "context": ".."
   },
   "mounts": [
-    "source=/home/taichi/.kube,target=/home/vscode/.kube,type=bind",
-    "source=/home/taichi/.config/helm,target=/home/vscode/.config/helm,type=bind",
-    "source=/home/taichi/.terraform.d,target=/home/vscode/.terraform.d,type=bind",
-    "source=/home/taichi/.azure,target=/home/vscode/.azure,type=bind"
+    "source=/home/wsladmin/.kube,target=/home/vscode/.kube,type=bind",
+    "source=/home/wsladmin/.config/helm,target=/home/vscode/.config/helm,type=bind",
+    "source=/home/wsladmin/.terraform.d,target=/home/vscode/.terraform.d,type=bind",
+    "source=/home/wsladmin/.azure,target=/home/vscode/.azure,type=bind"
   ],
   "customizations": {
     "vscode": {
