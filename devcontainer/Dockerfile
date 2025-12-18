@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/devcontainers/base:ubuntu-22.04
 
-ENV K8S_VERSION="v1.34"
+ENV K8S_VERSION="v1.34" \
     TF_VERSION="1.14.2"
 
 # 必要パッケージ

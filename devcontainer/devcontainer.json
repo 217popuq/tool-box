@@ -6,13 +6,17 @@
   },
   "mounts": [
     "source=/home/wsladmin/.kube,target=/home/vscode/.kube,type=bind",
-    "source=/home/wsladmin/.config/helm,target=/home/vscode/.config/helm,type=bind",
-    "source=/home/wsladmin/.terraform.d,target=/home/vscode/.terraform.d,type=bind",
-    "source=/home/wsladmin/.azure,target=/home/vscode/.azure,type=bind"
+    "source=/home/wsladmin/.azure,target=/home/vscode/.azure,type=bind",
+    "source=/home/wsladmin/.gitconfig,target=/home/vscode/.gitconfig,type=bind",
+    "source=/home/wsladmin/.bashrc,target=/home/vscode/.bashrc,type=bind"
   ],
   "customizations": {
     "vscode": {
+      "extensions": [
+        "hashicorp.terraform"
+      ],
       "settings": {
+        "files.eol": "\n",
         "terminal.integrated.defaultProfile.linux": "bash"
       }
     }
