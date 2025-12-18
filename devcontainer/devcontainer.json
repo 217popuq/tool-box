@@ -16,8 +16,17 @@
         "hashicorp.terraform"
       ],
       "settings": {
+        "editor.renderWhitespace": "all",
         "files.eol": "\n",
-        "terminal.integrated.defaultProfile.linux": "bash"
+        "terminal.integrated.defaultProfile.linux": "bash",
+
+        // Terraform 専用の言語別設定
+        "[terraform]": {
+          "editor.tabSize": 2,
+          "editor.insertSpaces": true,
+          "editor.detectIndentation": false,
+          "editor.formatOnSave": true
+        }
       }
     }
   },
