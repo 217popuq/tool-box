@@ -13,7 +13,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "hashicorp.terraform"
+        "hashicorp.terraform",
+        "github.copilot"
       ],
       "settings": {
         "editor.renderWhitespace": "all",
@@ -30,7 +31,7 @@
       }
     }
   },
-  "postCreateCommand": "bash .devcontainer/scripts/install-tools.sh",
+  "postCreateCommand": "sudo -u vscode bash .devcontainer/scripts/install-tools.sh", // install-toosl.shはvscodeユーザーで実行
   "remoteUser": "vscode",
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:1": {},

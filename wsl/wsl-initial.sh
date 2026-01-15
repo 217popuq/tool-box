@@ -49,3 +49,6 @@ apt-get install azure-cli
 
 cd ~/
 mkdir .kube
+
+# completion
+echo "### WSL initial setup completed ###"

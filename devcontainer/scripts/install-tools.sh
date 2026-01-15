@@ -1,14 +1,12 @@
 #!/bin/bash
 set -e
 
-# terraform check
-echo "### terraform versions ###"
+# version check
+echo "### versions ###"
+kubectl version --client
+k9s version
 tenv version
-tenv tf install $TF_VERSION
 terraform version
-
-# kubernetes check
-echo "### kubernetes version ###"
-kubectl version
+helm version
 
 echo "### 開発ツールのインストール完了 ###"
