@@ -48,6 +48,7 @@ apt-get install azure-cli
 # make directory
 
 cd ~/
+mkdir repos
 mkdir .kube
 
 # completion

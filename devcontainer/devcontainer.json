@@ -4,12 +4,6 @@
     "dockerfile": "Dockerfile",
     "context": ".."
   },
-  "mounts": [
-    "source=/home/wsladmin/.kube,target=/home/vscode/.kube,type=bind",
-    "source=/home/wsladmin/.azure,target=/home/vscode/.azure,type=bind",
-    "source=/home/wsladmin/.gitconfig,target=/home/vscode/.gitconfig,type=bind",
-    "source=/home/wsladmin/.bashrc,target=/home/vscode/.bashrc,type=bind"
-  ],
   "customizations": {
     "vscode": {
       "extensions": [
@@ -31,11 +25,19 @@
       }
     }
   },
-  "postCreateCommand": "sudo -u vscode bash .devcontainer/scripts/install-tools.sh", // install-toosl.shはvscodeユーザーで実行
-  "remoteUser": "vscode",
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:1": {},
     "ghcr.io/devcontainers/features/copilot-cli:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {}
-  }
+  },
+  "mounts": [
+    "source=${localEnv:HOME}/.kube,target=/home/vscode/.kube,type=bind",
+    "source=${localEnv:HOME}/.azure,target=/home/vscode/.azure,type=bind",
+    "source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind",
+    "source=${localEnv:HOME}/.bashrc,target=/home/vscode/.bashrc,type=bind"
+  ],
+  "postCreateCommand": "bash .devcontainer/scripts/install-tools.sh",
+  "remoteUser": "vscode",
+  "workspaceFolder": "/workspaces",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces,type=bind"
 }

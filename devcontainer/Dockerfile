@@ -49,21 +49,6 @@ RUN set -e \
     && curl -L https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_amd64.tar.gz \
     | tar xz -C /usr/local/bin k9s
 
-# terraform インストール
-## tenv 最新版インストール
-RUN set -e \
-    && LATEST_VERSION=$(curl --silent https://api.github.com/repos/tofuutils/tenv/releases/latest | jq -r .tag_name) \
-    && curl -L "https://github.com/tofuutils/tenv/releases/download/${LATEST_VERSION}/tenv_${LATEST_VERSION}_amd64.deb" -o /tmp/tenv.deb \
-    && dpkg -i /tmp/tenv.deb || apt-get install -f -y \
-    && rm /tmp/tenv.deb \
-    && tenv --version
-## terraform インストール
-RUN set -e \
-    && tenv tf install ${TF_VERSION} \
-    && tenv tf use ${TF_VERSION} \
-    && ln -sf ${HOME_DIR}/.tenv/versions/tf/${TF_VERSION}/terraform /usr/local/bin/terraform \
-    && terraform -version
-
 # helm インストール
 RUN set -e \
     && curl -L "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" \
@@ -72,3 +57,26 @@ RUN set -e \
     && rm -rf linux-amd64 \
     && helm version
 
+## tenv 最新版インストール
+RUN set -e \
+    && LATEST_VERSION=$(curl --silent https://api.github.com/repos/tofuutils/tenv/releases/latest | jq -r .tag_name) \
+    && curl -L "https://github.com/tofuutils/tenv/releases/download/${LATEST_VERSION}/tenv_${LATEST_VERSION}_amd64.deb" -o /tmp/tenv.deb \
+    && dpkg -i /tmp/tenv.deb || apt-get install -f -y \
+    && rm /tmp/tenv.deb \
+    && tenv --version
+
+# vscode user 追加
+# ※mcr.microsoft.com/devcontainers/base:ubuntu-22.04 イメージには最初から存在するが他項と整合性を取るため再定義する
+RUN set -e \
+    && groupadd --gid ${USER_GID} ${GROUPNAME} || true \
+    && useradd --uid ${USER_UID} --gid ${USER_GID} -m -s /bin/bash ${USERNAME} || true \
+    && mkdir -p ${HOME_DIR} \
+    && chown -R ${USERNAME}:${GROUPNAME} ${HOME_DIR}
+
+# terraform インストール
+# tenvはユーザーのホームディレクトリにインストールされるためUSER切り替え後に実行する
+USER ${USERNAME}
+RUN set -e \
+    && tenv tf install ${TF_VERSION} \
+    && tenv tf use ${TF_VERSION} \
+    && terraform -version
